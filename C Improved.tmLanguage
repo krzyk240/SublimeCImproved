@@ -1191,31 +1191,82 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key> <string>\s*(\b(0[xX][0-9a-fA-F]*|0[0-7]*|[1-9][0-9]*)[uU]?(ll?|LL?)?\b)</string>
+					<key>match</key> <string>(?i)(?&lt;!\.)\b(?:(0x)(?!p)(?:[0-9a-f]*\.?[0-9a-f]*))(?:(p)[+\-]?[0-9]+|(p))([g-z]*?)[fl]?\b(?!\.)</string>
+					<key>name</key> <string>constant.numeric.float.hexadecimal.c</string>
 					<key>captures</key>
 					<dict>
-						<key>1</key> <dict> <key>name</key> <string>constant.numeric.integer.c</string> </dict>
+						<key>1</key> <dict> <key>name</key> <string>punctuation.definition.numeric.prefix.hexadecimal.c</string> </dict>
+						<key>2</key> <dict> <key>name</key> <string>punctuation.definition.numeric.exponent.hexadecimal.c</string> </dict>
+						<key>3</key> <dict> <key>name</key> <string>invalid.deprecated.invalid-suffix-in-number.c</string> </dict>
 					</dict>
 				</dict>
 				<dict>
-					<key>match</key> <string>\s*(\b(([0-9]+\.[0-9]*)|(\.[0-9]+))([eE][+\-]?[0-9]+)?[fF]?\b)</string>
+					<key>match</key> <string>(?i)(?&lt;!\.)\b(?:[0-9]+\.[0-9]*|\.[0-9]+|[0-9]+(?=e))(?:(e)[+\-]?[0-9]+|(p[+\-]?[0-9]+|[ep]))?([g-z]*?)[fl]?\b(?!\.)</string>
+					<key>name</key> <string>constant.numeric.float.c</string>
 					<key>captures</key>
 					<dict>
-						<key>1</key> <dict> <key>name</key> <string>constant.numeric.float.c</string> </dict>
+						<key>1</key> <dict> <key>name</key> <string>punctuation.definition.numeric.exponent.c</string> </dict>
+						<key>2</key> <dict> <key>name</key> <string>invalid.illegal.exponent-missing.c</string> </dict>
+						<key>3</key> <dict> <key>name</key> <string>invalid.deprecated.invalid-suffix-in-number.c</string> </dict>
 					</dict>
 				</dict>
 				<dict>
-					<key>match</key> <string>\s*(\b(?i:(0b[01]+)U?L{1,2})\b)</string>
+					<key>match</key> <string>(?i)(?&lt;!\.)\b(?:0x)?0+(u?l{0,2}|lul?|llu)\b(?!\.)</string>
+					<key>name</key> <string>constant.numeric.integer.zero.c</string>
 					<key>captures</key>
 					<dict>
-						<key>1</key> <dict> <key>name</key> <string>constant.numeric.integer.long.binary.c</string> </dict>
+						<key>1</key> <dict> <key>name</key> <string>punctuation.definition.numeric.suffix.c</string> </dict>
 					</dict>
 				</dict>
 				<dict>
-					<key>match</key> <string>\s*(\b(?i:(0b[01]+)U?)\b)</string>
+					<key>match</key> <string>(?i)(?&lt;!\.)\b(0x)(u?l{0,2}|lul?|llu)\b(?!\.)</string>
+					<key>name</key> <string>invalid.illegal.invalid-number-literal.c</string>
 					<key>captures</key>
 					<dict>
-						<key>1</key> <dict> <key>name</key> <string>constant.numeric.integer.binary.c</string> </dict>
+						<key>1</key> <dict> <key>name</key> <string>punctuation.definition.numeric.prefix.hexadecimal.c</string> </dict>
+						<key>2</key> <dict> <key>name</key> <string>punctuation.definition.numeric.suffix.c</string> </dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key> <string>(?i)(?&lt;!\.)\b(0x)[0-9a-f]++([g-z]*?)(u?l{0,2}|lul?|llu)\b(?!\.)</string>
+					<key>name</key> <string>constant.numeric.integer.hexadecimal.c</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key> <dict> <key>name</key> <string>punctuation.definition.numeric.prefix.hexadecimal.c</string> </dict>
+						<key>2</key> <dict> <key>name</key> <string>invalid.deprecated.invalid-suffix-in-number.c</string> </dict>
+						<key>3</key> <dict> <key>name</key> <string>punctuation.definition.numeric.suffix.c</string> </dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key> <string>(?i)(?&lt;!\.)\b(0b)[01]*+([0-9a-f]*?)[01]*([g-z]*?)(u?l{0,2}|lul?|llu)\b(?!\.)</string>
+					<key>name</key> <string>constant.numeric.integer.octal.c</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key> <dict> <key>name</key> <string>punctuation.definition.numeric.prefix.binary.c</string> </dict>
+						<key>2</key> <dict> <key>name</key> <string>invalid.illegal.invalid-digit-in-binary-number.c</string> </dict>
+						<key>3</key> <dict> <key>name</key> <string>invalid.deprecated.invalid-suffix-in-number.c</string> </dict>
+						<key>4</key> <dict> <key>name</key> <string>punctuation.definition.numeric.suffix.c</string> </dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key> <string>(?i)(?&lt;!\.)\b(0)[0-7]*+([0-9a-f]*?)[0-7]*([g-z]*?)(u?l{0,2}|lul?|llu)\b(?!\.)</string>
+					<key>name</key> <string>constant.numeric.integer.octal.c</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key> <dict> <key>name</key> <string>punctuation.definition.numeric.prefix.octal.c</string> </dict>
+						<key>2</key> <dict> <key>name</key> <string>invalid.illegal.invalid-digit-in-octal-number.c</string> </dict>
+						<key>3</key> <dict> <key>name</key> <string>invalid.deprecated.invalid-suffix-in-number.c</string> </dict>
+						<key>4</key> <dict> <key>name</key> <string>punctuation.definition.numeric.suffix.c</string> </dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key> <string>(?i)(?&lt;!\.)\b[1-9][0-9]*+([0-9a-f]*?)[0-9]*([g-z]*?)(u?l{0,2}|lul?|llu)\b(?!\.)</string>
+					<key>name</key> <string>constant.numeric.integer.decimal.c</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key> <dict> <key>name</key> <string>invalid.illegal.invalid-digit-in-decimal-number.c</string> </dict>
+						<key>2</key> <dict> <key>name</key> <string>invalid.deprecated.invalid-suffix-in-number.c</string> </dict>
+						<key>3</key> <dict> <key>name</key> <string>punctuation.definition.numeric.suffix.c</string> </dict>
 					</dict>
 				</dict>
 			</array>
