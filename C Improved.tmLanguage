@@ -334,7 +334,7 @@
 				  | #  or type modifier / closing bracket before name
 				    (?&lt;= [^&amp;]&amp; | [*&gt;)}\]] ) ) \s*
 
-				(   (?: [A-Za-z_]\w*+ | ::[^:] )++
+				(   (?: ~?[A-Za-z_]\w*+ | ::[^:] )++
 				    (?: (?&lt;= ^ operator | \W operator )  # C++ operator?
 				        (?: [-*&amp;&lt;&gt;=+!]+ | \(\) | \[\] ) )? )
 
@@ -350,7 +350,7 @@
 				<dict> <key>include</key> <string>#lex</string> </dict>
 				<dict> <key>include</key> <string>#parens</string> </dict>
 				<dict>
-					<key>match</key> <string>\s*\b(const|override)\b</string>
+					<key>match</key> <string>\s*\b(const|override|noexcept|default|final|delete)\b</string>
 					<key>name</key> <string>storage.modifier.c</string>
 				</dict>
 				<dict> <key>include</key> <string>#block-lookahead-end</string> </dict>
@@ -1096,7 +1096,7 @@
 					</dict>
 				</dict>
 				<dict>
-					<key>match</key> <string>\s*\b((?:__|(?!\w+__))asm(?:__)?|break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while|__extension__)\b</string>
+					<key>match</key> <string>\s*\b((?:__|(?!\w+__))asm(?:__)?|break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while|__extension__|try|catch)\b</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key> <dict> <key>name</key> <string>keyword.control.c</string> </dict>
