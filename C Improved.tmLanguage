@@ -350,8 +350,12 @@
 				<dict> <key>include</key> <string>#lex</string> </dict>
 				<dict> <key>include</key> <string>#parens</string> </dict>
 				<dict>
-					<key>match</key> <string>\s*\b(const|override|noexcept|default|final|delete)\b</string>
+					<key>match</key> <string>\s*\b(const|override)\b</string>
 					<key>name</key> <string>storage.modifier.c</string>
+				</dict>
+				<dict>
+					<key>match</key> <string>\s*\b(override|noexcept|default|final|delete)\b</string>
+					<key>name</key> <string>storage.modifier.c++</string>
 				</dict>
 				<dict> <key>include</key> <string>#block-lookahead-end</string> </dict>
 			</array>
@@ -804,6 +808,20 @@
 					</dict>
 				</dict>
 				<dict>
+					<key>match</key> <string>\s*\b((nullptr)_t)\b</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key> <dict> <key>name</key> <string>support.type.sys-types.c++</string> </dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key> <string>\s*\b((std::)?(pair|list|deque|queue|stack|exception|bad_alloc|logic_error|runtime_error|out_of_range|vector|map|set|multimap|multiset|(basic_)?(fstream|ios|ostream|string)))\b</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key> <dict> <key>name</key> <string>variable.parameter.c++</string> </dict>
+					</dict>
+				</dict>
+				<dict>
 					<key>match</key> <string>\s*\b(pthread_(?:t|attr_t|once_t|key_t|(?:cond|mutex|rwlock)(?:attr)?_t))\b</string>
 					<key>captures</key>
 					<dict>
@@ -1096,10 +1114,17 @@
 					</dict>
 				</dict>
 				<dict>
-					<key>match</key> <string>\s*\b((?:__|(?!\w+__))asm(?:__)?|break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while|__extension__|try|catch)\b</string>
+					<key>match</key> <string>\s*\b((?:__|(?!\w+__))asm(?:__)?|break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while|__extension__)\b</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key> <dict> <key>name</key> <string>keyword.control.c</string> </dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key> <string>\s*\b(static_cast|const_cast|dynamic_cast|reinterpret_cast|friend|try|catch|throw|delete|delete\[\]|new|new\[\])\b</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key> <dict> <key>name</key> <string>keyword.control.c++</string> </dict>
 					</dict>
 				</dict>
 				<dict>
@@ -1114,6 +1139,13 @@
 					<key>captures</key>
 					<dict>
 						<key>1</key> <dict> <key>name</key> <string>storage.modifier.c</string> </dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key> <string>\s*\b(constexpr)\b</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key> <dict> <key>name</key> <string>storage.modifier.c++</string> </dict>
 					</dict>
 				</dict>
 				<dict>
@@ -1183,6 +1215,13 @@
 					<key>captures</key>
 					<dict>
 						<key>1</key> <dict> <key>name</key> <string>constant.language.c</string> </dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key> <string>\s*\b(nullptr)\b</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key> <dict> <key>name</key> <string>constant.language.c++</string> </dict>
 					</dict>
 				</dict>
 			</array>
